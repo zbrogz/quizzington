@@ -2,29 +2,22 @@
 # Questions
 
 ## Question 1
+![Alt text](./apple.jpg)
 
 ### Answer A
-#### image
 ![Alt text](./apple.jpg)
-#### tags
-Apples
+Apples, Bananas, Oranges
 
 ### Answer B
-#### image
 ![Alt text](./apple.jpg)
-#### tags
 Bananas
 
 ### Answer C
-#### image
 ![Alt text](./apple.jpg)
-#### tags
 Cantelope
 
 ### Answer D
-#### image
 ![Alt text](./apple.jpg)
-#### tags
 Dogs
 
 
