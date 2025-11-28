@@ -1,103 +1,111 @@
 # What color should you choose?
-![Alt text](./apple.jpg)
+<img src="./images/nature-color-wheel.png" width="250">
 
 # Questions
 
 <!-- Question 1 -->
 ## What fruits do you like the most?
-![Alt text](./apple.jpg) <!-- optional image -->
+<img src="./images/apples.jpg" width="250"> <!-- optional image -->
+
 <!-- Answer A -->
 ### Apples and cherries
-![Alt text](./apple.jpg) <!-- optional image -->
-tags: red <!-- comma-separated list of tags -->
+- tags: red <!-- comma-separated list of tags -->
+- <img src="./images/apple-cherry.jpg" width="250">
 <!-- Answer B -->
 ### Bananas and lemons
-![Alt text](./apple.jpg)
-tags: yellow
+- tags: yellow
+- <img src="./images/bananas-lemons.jpg" width="250">
 <!-- Answer C -->
-### Cantelope and limes
-![Alt text](./apple.jpg)
-tags: green
+### Canteloupe and limes
+- tags: green
+- <img src="./images/cantelope-limes.jpg" width="250">
 <!-- Answer D -->
 ### Tangerines and oranges
-![Alt text](./apple.jpg)
-tags: orange
+- tags: orange
+- <img src="./images/tangerines-oranges.jpg" width="250">
 
 ## What animals do you like the most?
-![Alt text](./animal.jpg)
+<img src="./images/animal.jpg" width="250">
+
 ### Cats and foxes
-![Alt text](./animal.jpg)
-tags: orange
+- tags: orange
+- <img src="./images/animal.jpg" width="250">
 ### Dogs and wolves
-![Alt text](./animal.jpg)
-tags: yellow
+- tags: yellow
+- <img src="./images/animal.jpg" width="250">
 ### Frogs and parrots
-![Alt text](./animal.jpg)
-tags: green
+- tags: green
+- <img src="./images/animal.jpg" width="250">
 ### Cardinals and ladybugs
-![Alt text](./animal.jpg)
-tags: red
+- tags: red
+- <img src="./images/animal.jpg" width="250">
 
 ## What kinds of weather do you enjoy?
-![Alt text](./weather.jpg)
+<img src="./images/weather.jpg" width="250">
+
 ### Sunny and bright
-![Alt text](./weather.jpg)
-tags: yellow
+- tags: yellow
+- <img src="./images/weather.jpg" width="250">
 ### Rainy and calm
-![Alt text](./weather.jpg)
-tags: green
+- tags: green
+- <img src="./images/weather.jpg" width="250">
 ### Stormy and energetic
-![Alt text](./weather.jpg)
-tags: red
+- tags: red
+- <img src="./images/weather.jpg" width="250">
 ### Warm and breezy
-![Alt text](./weather.jpg)
-tags: orange
+- tags: orange
+- <img src="./images/weather.jpg" width="250">
 
 ## What types of hobbies do you prefer?
-![Alt text](./hobbies.jpg)
+<img src="./images/hobbies.jpg" width="250">
+
 ### Painting and crafting
-![Alt text](./hobbies.jpg)
-tags: orange
+- tags: orange
+- <img src="./images/hobbies.jpg" width="250">
 ### Reading and writing
-![Alt text](./hobbies.jpg)
-tags: green
+- tags: green
+- <img src="./images/hobbies.jpg" width="250">
 ### Sports and fitness
-![Alt text](./hobbies.jpg)
-tags: yellow
+- tags: yellow
+- <img src="./images/hobbies.jpg" width="250">
 ### Cooking and baking
-![Alt text](./hobbies.jpg)
-tags: red
+- tags: red
+- <img src="./images/hobbies.jpg" width="250">
 
 ## Which types of vacations appeal to you most?
-![Alt text](./vacation.jpg)
+<img src="./images/vacation.jpg" width="250">
+
 ### Beach trips and sunshine
-![Alt text](./vacation.jpg)
-tags: yellow
+- tags: yellow
+- <img src="./images/vacation.jpg" width="250">
 ### Mountain retreats and forests
-![Alt text](./vacation.jpg)
-tags: green
+- tags: green
+- <img src="./images/vacation.jpg" width="250">
 ### City exploration and nightlife
-![Alt text](./vacation.jpg)
-tags: red
+- tags: red
+- <img src="./images/vacation.jpg" width="250">
 ### Desert landscapes and warm climates
-![Alt text](./vacation.jpg)
-tags: orange
+- tags: orange
+- <img src="./images/vacation.jpg" width="250">
 
 # Results
 
 <!-- Result 1 -->
 ## You would like red!
-![Alt text](./apple.jpg <!-- optional image -->
-tags: red
+- tags: red
+- <img src="./images/red.png" width="250"> <!-- optional image --" width="250">
 
 <!-- Result 2 -->
 ## You would like yellow!
-tags: yellow
+- tags: yellow
+- <img src="./images/yellow.jpg" width="250">
 
 <!-- Result 3 -->
 ## You would like green!
-tags: green
+- tags: green
+- <img src="./images/green.png" width="250">
 
 <!-- Result 4 -->
 ## You would like orange!
-tags: orange
+- tags: orange
+- <img src="./images/orange.jpg" width="250">
