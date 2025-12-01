@@ -1,0 +1,158 @@
+{
+    "title": "What color should you choose?",
+    "image": "./images/nature-color-wheel.png",
+    "questions": [
+        {
+            "question": "What fruits do you like the most?",
+            "image": "./images/apples.jpg",
+            "answers": [
+                {
+                    "answer": "Apples and cherries",
+                    "tags": ["red"],
+                    "image": "./images/apple-cherry.jpg"
+                },
+                {
+                    "answer": "Bananas and lemons",
+                    "tags": ["yellow"],
+                    "image": "./images/bananas-lemons.jpg"
+                },
+                {
+                    "answer": "Canteloupe and limes",
+                    "tags": ["green"],
+                    "image": "./images/cantelope-limes.jpg"
+                },
+                {
+                    "answer": "Tangerines and oranges",
+                    "tags": ["orange"],
+                    "image": "./images/tangerines-oranges.jpg"
+                }
+            ]
+        },
+        {
+            "question": "What animals do you like the most?",
+            "image": "./images/animal.jpg",
+            "answers": [
+                {
+                    "answer": "Cats and foxes",
+                    "tags": ["orange"],
+                    "image": "./images/animal.jpg"
+                },
+                {
+                    "answer": "Dogs and wolves",
+                    "tags": ["yellow"],
+                    "image": "./images/animal.jpg"
+                },
+                {
+                    "answer": "Frogs and parrots",
+                    "tags": ["green"],
+                    "image": "./images/animal.jpg"
+                },
+                {
+                    "answer": "Cardinals and ladybugs",
+                    "tags": ["red"],
+                    "image": "./images/animal.jpg"
+                }
+            ]
+        },
+        {
+            "question": "What kinds of weather do you enjoy?",
+            "image": "./images/weather.jpg",
+            "answers": [
+                {
+                    "answer": "Sunny and bright",
+                    "tags": ["yellow"],
+                    "image": "./images/weather.jpg"
+                },
+                {
+                    "answer": "Rainy and calm",
+                    "tags": ["green"],
+                    "image": "./images/weather.jpg"
+                },
+                {
+                    "answer": "Stormy and energetic",
+                    "tags": ["red"],
+                    "image": "./images/weather.jpg"
+                },
+                {
+                    "answer": "Warm and breezy",
+                    "tags": ["orange"],
+                    "image": "./images/weather.jpg"
+                }
+            ]
+        },
+        {
+            "question": "What types of hobbies do you prefer?",
+            "image": "./images/hobbies.jpg",
+            "answers": [
+                {
+                    "answer": "Painting and crafting",
+                    "tags": ["orange"],
+                    "image": "./images/hobbies.jpg"
+                },
+                {
+                    "answer": "Reading and writing",
+                    "tags": ["green"],
+                    "image": "./images/hobbies.jpg"
+                },
+                {
+                    "answer": "Sports and fitness",
+                    "tags": ["yellow"],
+                    "image": "./images/hobbies.jpg"
+                },
+                {
+                    "answer": "Cooking and baking",
+                    "tags": ["red"],
+                    "image": "./images/hobbies.jpg"
+                }
+            ]
+        },
+        {
+            "question": "Which types of vacations appeal to you most?",
+            "image": "./images/vacation.jpg",
+            "answers": [
+                {
+                    "answer": "Beach trips and sunshine",
+                    "tags": ["yellow"],
+                    "image": "./images/vacation.jpg"
+                },
+                {
+                    "answer": "Mountain retreats and forests",
+                    "tags": ["green"],
+                    "image": "./images/vacation.jpg"
+                },
+                {
+                    "answer": "City exploration and nightlife",
+                    "tags": ["red"],
+                    "image": "./images/vacation.jpg"
+                },
+                {
+                    "answer": "Desert landscapes and warm climates",
+                    "tags": ["orange"],
+                    "image": "./images/vacation.jpg"
+                }
+            ]
+        }
+    ],
+    "results": [
+        {
+            "result": "You would like red!",
+            "tags": ["red"],
+            "image": "./images/red.png"
+        },
+        {
+            "result": "You would like yellow!",
+            "tags": ["yellow"],
+            "image": "./images/yellow.jpg"
+        },
+        {
+            "result": "You would like green!",
+            "tags": ["green"],
+            "image": "./images/green.png"
+        },
+        {
+            "result": "You would like orange!",
+            "tags": ["orange"],
+            "image": "./images/orange.jpg"
+        }
+    ]
+}

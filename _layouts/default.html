@@ -6,8 +6,15 @@
   </head>
   <body>
     TODO
+    <div id="app"></div>
     <script>
-      window.content = {{ page.content | jsonify }};
+      window.quizMarkdown = {{ page.content | jsonify }};
+    </script>
+    <script>
+      {% include quiz-parser.js %}
+    </script>
+    <script>
+      {% include render.js %}
     </script>
   </body>
 </html>
