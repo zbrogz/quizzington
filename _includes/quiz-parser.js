@@ -143,4 +143,4 @@ function parseQuizMarkdown(md) {
     };
 }
 
-export default parseQuizMarkdown;
+// export default parseQuizMarkdown;
