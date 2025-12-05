@@ -11,13 +11,11 @@ const Quiz: Component<{ quiz: QuizType }> = (props) => {
     >({});
 
     const currentQuestion = () => {
-        console.log("Current question index:", questionIndex());
         const index = questionIndex();
         return index !== null ? props.quiz.questions[index] : undefined;
     };
 
     const resultIndex = () => {
-        console.log("Calculating result index based on selected answers.");
         const answers = selectedAnswers();
         const tagCounts: Record<string, number> = {};
         for (const [qIndex, aIndex] of Object.entries(answers)) {

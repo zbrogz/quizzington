@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import QuizComponent from "../components/Quiz";
-import type { QuizType } from "../types/quiz";
-import parseQuizFromMarkdown from "../utils/quiz-parser.js";
+import QuizComponent from "../../components/Quiz";
+import type { QuizType } from "../../types/quiz";
+import parseQuizFromMarkdown from "../../utils/quiz-parser.js";
+import "../../styles/global.css";
 
 export async function getStaticPaths() {
     const quizzes = await getCollection("quizzes");
@@ -11,9 +12,9 @@ export async function getStaticPaths() {
         props: { quiz },
     }));
 }
+
 const { quiz } = Astro.props;
 const quizMarkdown = quiz.body;
-
 const quizData = parseQuizFromMarkdown(quizMarkdown) as QuizType;
 ---
 

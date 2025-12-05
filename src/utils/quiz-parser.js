@@ -1,146 +1,222 @@
-function extractImage(line) {
-    const match = line.match(/<img[^>]*src="([^"]+)"/);
-    return match ? match[1] : null;
-}
+const parseQuizMarkdown = (md) => {
+    // Remove BOM if present and normalize newlines
+    md = md.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
 
-function extractTags(line) {
-    const match = line.match(/tags:\s*([a-zA-Z0-9,\s-]+)/);
-    if (!match) return [];
-    return match[1].split(",").map((t) => t.trim());
-}
-
-function parseQuizMarkdown(md) {
-    const lines = md.split("\n").map((l) => l.trim());
-
-    let i = 0;
-
-    // ----- TITLE -----
-    let title = "";
-    let imageUrl = "";
-    while (i < lines.length) {
-        if (lines[i].startsWith("# ")) {
-            title = lines[i].replace("# ", "").trim();
-            i++;
-            continue;
-        }
-        if (lines[i].includes("<img")) {
-            imageUrl = extractImage(lines[i]);
-            i++;
-            break;
-        }
-        i++;
-    }
-
-    // Move to # Questions
-    while (i < lines.length && !lines[i].startsWith("# Questions")) i++;
-    i++; // move past "# Questions"
-
-    // ----- QUESTIONS -----
-    const questions = [];
-    while (i < lines.length && !lines[i].startsWith("# Results")) {
-        if (lines[i].startsWith("## ")) {
-            // New question
-            const questionText = lines[i].replace("## ", "").trim();
-            i++;
-
-            // Question imageUrl
-            let questionImage = "";
-            if (lines[i] && lines[i].includes("<img")) {
-                questionImage = extractImage(lines[i]);
-                i++;
-            }
-
-            const answers = [];
-
-            // Read answers under this question until the next "## "
-            while (
-                i < lines.length &&
-                !lines[i].startsWith("## ") &&
-                !lines[i].startsWith("# Results")
-            ) {
-                if (lines[i].startsWith("### ")) {
-                    const answerText = lines[i].replace("### ", "").trim();
-                    i++;
-
-                    let tags = [];
-                    let answerImage = "";
-
-                    // Read tags and imageUrl lines
-                    while (
-                        i < lines.length &&
-                        !lines[i].startsWith("### ") &&
-                        !lines[i].startsWith("## ") &&
-                        !lines[i].startsWith("# Results")
-                    ) {
-                        if (lines[i].startsWith("- tags:")) {
-                            tags = extractTags(lines[i]);
-                        }
-                        if (lines[i].includes("<img")) {
-                            answerImage = extractImage(lines[i]);
-                        }
-                        i++;
-                    }
-
-                    answers.push({
-                        answer: answerText,
-                        tags,
-                        imageUrl: answerImage,
-                    });
-
-                    continue;
-                }
-                i++;
-            }
-
-            questions.push({
-                question: questionText,
-                imageUrl: questionImage,
-                answers,
-            });
-
-            continue;
-        }
-
-        i++;
-    }
-
-    // ----- RESULTS -----
-    const results = [];
-    while (i < lines.length) {
-        if (lines[i].startsWith("## ")) {
-            const resultText = lines[i].replace("## ", "").trim();
-            i++;
-
-            let tags = [];
-            let resultImage = "";
-
-            while (i < lines.length && !lines[i].startsWith("## ")) {
-                if (lines[i].startsWith("- tags:")) {
-                    tags = extractTags(lines[i]);
-                }
-                if (lines[i].includes("<img")) {
-                    resultImage = extractImage(lines[i]);
-                }
-                i++;
-            }
-
-            results.push({
-                result: resultText,
-                tags,
-                imageUrl: resultImage,
-            });
-
-            continue;
-        }
-        i++;
-    }
-
-    return {
-        title,
-        imageUrl,
-        questions,
-        results,
+    const extractImage = (line) => {
+        const m = line.match(/<img\s+[^>]*src=(["'])(.*?)\1/i);
+        return m ? m[2] : null;
     };
-}
+
+    // strip HTML comments from a line (handles multi-line comments if they appear inside the line text)
+    const stripComments = (s) => s.replace(/<!--[\s\S]*?-->/g, "");
+
+    const resultObj = {
+        title: "",
+        imageUrl: "",
+        description: "",
+        questions: [],
+        results: [],
+    };
+
+    let section = "intro"; // intro | questions | results
+    let currentQuestion = null;
+    let currentAnswer = null;
+    let currentResult = null;
+    let seenIntroText = false; // to help decide description
+
+    const lines = md.split("\n");
+
+    for (let rawLine of lines) {
+        // remove comments then trim
+        const line = stripComments(rawLine).trim();
+        if (!line) continue;
+
+        const lower = line.toLowerCase();
+
+        // Switch sections first to avoid confusing the quiz title with "# Results" etc.
+        if (lower === "# questions") {
+            // flush any pending question/answer before switching
+            if (currentAnswer && currentQuestion) {
+                currentQuestion.answers.push(currentAnswer);
+                currentAnswer = null;
+            }
+            if (currentQuestion) {
+                resultObj.questions.push(currentQuestion);
+                currentQuestion = null;
+            }
+            section = "questions";
+            continue;
+        }
+        if (lower === "# results") {
+            // flush pending question/answer
+            if (currentAnswer && currentQuestion) {
+                currentQuestion.answers.push(currentAnswer);
+                currentAnswer = null;
+            }
+            if (currentQuestion) {
+                resultObj.questions.push(currentQuestion);
+                currentQuestion = null;
+            }
+            section = "results";
+            continue;
+        }
+
+        // IMAGE (common extraction)
+        const img = extractImage(line);
+
+        // ---------- INTRO ----------
+        if (section === "intro") {
+            if (line.startsWith("# ")) {
+                // only accept first top-level # as title
+                if (!resultObj.title) {
+                    resultObj.title = line.replace(/^#\s*/, "").trim();
+                }
+                continue;
+            }
+
+            // top-level image (first image in intro)
+            if (img && !resultObj.imageUrl) {
+                resultObj.imageUrl = img;
+                continue;
+            }
+
+            // description: first non-heading, non-image text in intro
+            if (!line.startsWith("#") && !img && !resultObj.description) {
+                resultObj.description = line;
+                seenIntroText = true;
+                continue;
+            }
+
+            // if we see small stray lines after description, ignore — keep only the first paragraph as description
+            continue;
+        }
+
+        // ---------- QUESTIONS ----------
+        if (section === "questions") {
+            if (line.startsWith("## ")) {
+                // new question: flush previous question
+                if (currentAnswer && currentQuestion) {
+                    currentQuestion.answers.push(currentAnswer);
+                    currentAnswer = null;
+                }
+                if (currentQuestion) {
+                    resultObj.questions.push(currentQuestion);
+                }
+
+                currentQuestion = {
+                    question: line.replace(/^##\s*/, "").trim(),
+                    imageUrl: "",
+                    answers: [],
+                };
+                continue;
+            }
+
+            if (!currentQuestion) {
+                // defensive: skip stray lines before first question header
+                continue;
+            }
+
+            // question-level image (if there's an image and no currentAnswer)
+            if (img && !currentAnswer && !currentQuestion.imageUrl) {
+                currentQuestion.imageUrl = img;
+                continue;
+            }
+
+            if (line.startsWith("### ")) {
+                // new answer: flush previous answer
+                if (currentAnswer) {
+                    currentQuestion.answers.push(currentAnswer);
+                }
+                currentAnswer = {
+                    answer: line.replace(/^###\s*/, "").trim(),
+                    tags: [],
+                    imageUrl: "",
+                };
+                continue;
+            }
+
+            // answer tags
+            if (line.toLowerCase().startsWith("tags:") && currentAnswer) {
+                const tagsPart = line.slice(5).trim();
+                currentAnswer.tags = tagsPart
+                    .split(",")
+                    .map((t) => t.trim())
+                    .filter(Boolean);
+                continue;
+            }
+
+            // answer image
+            if (img && currentAnswer && !currentAnswer.imageUrl) {
+                currentAnswer.imageUrl = img;
+                continue;
+            }
+
+            // anything else inside questions is ignored
+            continue;
+        }
+
+        // ---------- RESULTS ----------
+        if (section === "results") {
+            if (line.startsWith("## ")) {
+                // flush previous result
+                if (currentResult) {
+                    resultObj.results.push(currentResult);
+                }
+                currentResult = {
+                    result: line.replace(/^##\s*/, "").trim(),
+                    description: "",
+                    tags: [],
+                    imageUrl: "",
+                };
+                continue;
+            }
+
+            if (!currentResult) {
+                // defensive: skip stray lines before first result header
+                continue;
+            }
+
+            // result tags
+            if (line.toLowerCase().startsWith("tags:")) {
+                const tagsPart = line.slice(5).trim();
+                currentResult.tags = tagsPart
+                    .split(",")
+                    .map((t) => t.trim())
+                    .filter(Boolean);
+                continue;
+            }
+
+            // result image
+            if (img && !currentResult.imageUrl) {
+                currentResult.imageUrl = img;
+                continue;
+            }
+
+            // a plain paragraph beneath a result header — treat as description
+            if (!line.startsWith("#") && !img && !currentResult.description) {
+                currentResult.description = line;
+                continue;
+            }
+
+            continue;
+        }
+    }
+
+    // flush remaining answer/question/result
+    if (currentAnswer && currentQuestion) {
+        currentQuestion.answers.push(currentAnswer);
+        currentAnswer = null;
+    }
+    if (currentQuestion) {
+        resultObj.questions.push(currentQuestion);
+        currentQuestion = null;
+    }
+    if (currentResult) {
+        resultObj.results.push(currentResult);
+        currentResult = null;
+    }
+
+    return resultObj;
+};
 
 export default parseQuizMarkdown;

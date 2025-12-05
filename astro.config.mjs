@@ -2,12 +2,15 @@
 
 import solid from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
     // Enable Solid to support Solid JSX components.
     integrations: [solid()],
-	publicDir: "images",
     site: "https://zbrogz.github.io",
     base: "/quizzington/",
+    vite: {
+        plugins: [tailwindcss()],
+    },
 });
