@@ -4,7 +4,7 @@ const parseQuizMarkdown = (md) => {
 
     const extractImage = (line) => {
         const m = line.match(/<img\s+[^>]*src=(["'])(.*?)\1/i);
-        return m ? m[2] : null;
+        return m ? "../" + m[2] : null;
     };
 
     // strip HTML comments from a line (handles multi-line comments if they appear inside the line text)

@@ -10,6 +10,7 @@ export default defineConfig({
     integrations: [solid()],
     site: "https://zbrogz.github.io",
     base: "/quizzington/",
+    trailingSlash: "always",
     vite: {
         plugins: [tailwindcss()],
     },
