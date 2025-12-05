@@ -16,7 +16,7 @@ function parseQuizMarkdown(md) {
 
     // ----- TITLE -----
     let title = "";
-    let image = "";
+    let imageUrl = "";
     while (i < lines.length) {
         if (lines[i].startsWith("# ")) {
             title = lines[i].replace("# ", "").trim();
@@ -24,7 +24,7 @@ function parseQuizMarkdown(md) {
             continue;
         }
         if (lines[i].includes("<img")) {
-            image = extractImage(lines[i]);
+            imageUrl = extractImage(lines[i]);
             i++;
             break;
         }
@@ -43,7 +43,7 @@ function parseQuizMarkdown(md) {
             const questionText = lines[i].replace("## ", "").trim();
             i++;
 
-            // Question image
+            // Question imageUrl
             let questionImage = "";
             if (lines[i] && lines[i].includes("<img")) {
                 questionImage = extractImage(lines[i]);
@@ -65,7 +65,7 @@ function parseQuizMarkdown(md) {
                     let tags = [];
                     let answerImage = "";
 
-                    // Read tags and image lines
+                    // Read tags and imageUrl lines
                     while (
                         i < lines.length &&
                         !lines[i].startsWith("### ") &&
@@ -84,7 +84,7 @@ function parseQuizMarkdown(md) {
                     answers.push({
                         answer: answerText,
                         tags,
-                        image: answerImage,
+                        imageUrl: answerImage,
                     });
 
                     continue;
@@ -94,7 +94,7 @@ function parseQuizMarkdown(md) {
 
             questions.push({
                 question: questionText,
-                image: questionImage,
+                imageUrl: questionImage,
                 answers,
             });
 
@@ -127,7 +127,7 @@ function parseQuizMarkdown(md) {
             results.push({
                 result: resultText,
                 tags,
-                image: resultImage,
+                imageUrl: resultImage,
             });
 
             continue;
@@ -137,10 +137,10 @@ function parseQuizMarkdown(md) {
 
     return {
         title,
-        image,
+        imageUrl,
         questions,
         results,
     };
 }
 
-// export default parseQuizMarkdown;
+export default parseQuizMarkdown;

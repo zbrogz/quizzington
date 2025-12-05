@@ -1,0 +1,34 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import Quiz from "../components/Quiz";
+import type { QuizType } from "../types/quiz";
+import parseQuizFromMarkdown from "../utils/quiz-parser.js";
+// import quizData from "../util/what-color.js";
+
+const quizMarkdown = Astro.props.rawContent();
+const quizData = parseQuizFromMarkdown(quizMarkdown) as unknown as QuizType;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <style>
+            html,
+            body {
+                font-family: system-ui;
+                margin: 0;
+            }
+            body {
+                padding: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <Quiz client:visible quiz={quizData as QuizType} />
+        </main>
+    </body>
+</html>

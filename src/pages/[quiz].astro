@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import QuizComponent from "../components/Quiz";
+import type { QuizType } from "../types/quiz";
+import parseQuizFromMarkdown from "../utils/quiz-parser.js";
+
+export async function getStaticPaths() {
+    const quizzes = await getCollection("quizzes");
+    return quizzes.map((quiz) => ({
+        params: { quiz: quiz.id },
+        props: { quiz },
+    }));
+}
+const { quiz } = Astro.props;
+const quizMarkdown = quiz.body;
+
+const quizData = parseQuizFromMarkdown(quizMarkdown) as QuizType;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <style>
+            html,
+            body {
+                font-family: system-ui;
+                margin: 0;
+            }
+            body {
+                padding: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <QuizComponent client:visible quiz={quizData as QuizType} />
+        </main>
+    </body>
+</html>
