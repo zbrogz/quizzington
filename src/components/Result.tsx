@@ -4,6 +4,7 @@ import Button from "./Button";
 
 const Result: Component<{
     result: ResultType;
+    questionIndex: number;
     setQuestionIndex: Setter<number | null>;
     setSelectedAnswers: Setter<Record<number, number>>;
 }> = (props) => {
@@ -20,15 +21,26 @@ const Result: Component<{
                 />
             )}
 
-            <Button
-                fullWidth
-                onClick={() => {
-                    props.setQuestionIndex(null);
-                    props.setSelectedAnswers({});
-                }}
-            >
-                Restart Quiz
-            </Button>
+            <div class="flex justify-center gap-4 shrink-0 py-4 w-full">
+                <Button
+                    fullWidth
+                    onClick={() => {
+                        const newIndex = props.questionIndex - 1;
+                        props.setQuestionIndex(newIndex < 0 ? null : newIndex);
+                    }}
+                >
+                    Previous
+                </Button>
+                <Button
+                    fullWidth
+                    onClick={() => {
+                        props.setQuestionIndex(null);
+                        props.setSelectedAnswers({});
+                    }}
+                >
+                    Restart Quiz
+                </Button>
+            </div>
         </div>
     );
 };

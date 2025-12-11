@@ -69,6 +69,7 @@ const Quiz: Component<{ quiz: QuizType }> = (props) => {
             <Match when={questionIndex()! >= props.quiz.questions.length}>
                 <Result
                     result={props.quiz.results[resultIndex()]}
+                    questionIndex={questionIndex() as number}
                     setQuestionIndex={setQuestionIndex}
                     setSelectedAnswers={setSelectedAnswers}
                 />

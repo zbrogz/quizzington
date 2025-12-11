@@ -21,9 +21,7 @@ const Question: Component<{
             ...prev,
             [props.questionIndex]: answerIndex,
         }));
-        if (props.questionIndex !== props.questionCount - 1) {
-            handleNextQuestion();
-        }
+        handleNextQuestion();
     };
 
     const handleNextQuestion = () => {
@@ -60,7 +58,7 @@ const Question: Component<{
                 </div>
 
                 <div
-                    class="grid grid-cols-2 gap-4 max-w-xl 2xl:max-w-2xl"
+                    class="grid grid-cols-2 auto-rows-fr gap-4 max-w-xl 2xl:max-w-2xl"
                     classList={{
                         "md:grid-cols-3":
                             props.answers.length > 4 ||
@@ -75,7 +73,7 @@ const Question: Component<{
                             return (
                                 <label
                                     tabIndex={0}
-                                    class={`cursor-pointer border rounded-lg p-2 sm:p-3 2xl:p-4 flex flex-col items-center justify-between text-center transition select-none h-full fade-in
+                                    class={`min-h-24 cursor-pointer border rounded-lg p-2 sm:p-3 2xl:p-4 flex flex-col items-center justify-between text-center transition select-none h-full fade-in
                                     ${
                                         isSelected()
                                             ? "border-gray-500 bg-gray-200"
@@ -124,7 +122,7 @@ const Question: Component<{
                                             />
                                         </div>
                                     )}
-                                    <span class="text-gray-800 font-medium shrink">
+                                    <span class="text-gray-800 font-medium shrink my-auto">
                                         {answer.answer}
                                     </span>
                                 </label>
