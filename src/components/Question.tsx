@@ -1,6 +1,7 @@
 import type { Component, Accessor, Setter } from "solid-js";
 import type { AnswerType } from "../types/quiz";
 import { For } from "solid-js";
+import Button from "./Button";
 
 const Question: Component<{
     question: string;
@@ -20,7 +21,9 @@ const Question: Component<{
             ...prev,
             [props.questionIndex]: answerIndex,
         }));
-        handleNextQuestion();
+        if (props.questionIndex !== props.questionCount - 1) {
+            handleNextQuestion();
+        }
     };
 
     const handleNextQuestion = () => {
@@ -33,91 +36,116 @@ const Question: Component<{
     };
 
     return (
-        <div class="max-w-3xl mx-auto p-6 space-y-6">
-            <div class="text-center">
-                <p class="text-gray-700">
-                    Question {props.questionIndex + 1} of {props.questionCount}
-                </p>
-                <h1 class="text-4xl text-gray-800">{props.question}</h1>
-                {props.imageUrl && (
-                    <img
-                        src={props.imageUrl}
-                        alt={`Question ${props.questionIndex + 1}`}
-                        draggable="false"
-                        class="mx-auto mt-4 max-h-64 object-contain rounded shadow"
-                    />
-                )}
-            </div>
-
+        <div>
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                classList={{
-                    "md:grid-cols-3":
-                        props.answers.length > 4 || props.answers.length === 3,
-                }}
+                class="flex-1 w-full overflow-auto flex flex-col items-center space-y-6 p-6 pt-8 fade-in"
+                style={{ height: "calc(100dvh - 81px)" }}
             >
-                <For each={props.answers}>
-                    {(answer, idx) => {
-                        const isSelected = () =>
-                            selectedAnswerIndex() === idx();
-                        return (
-                            <label
-                                tabIndex={0}
-                                class={`cursor-pointer border rounded-lg p-4 flex flex-col items-center justify-center text-center transition box-border
+                <div class="text-center max-w-3xl">
+                    <p class="text-gray-700">
+                        Question {props.questionIndex + 1} of{" "}
+                        {props.questionCount}
+                    </p>
+                    <h1 class="text-4xl text-gray-800 shrink-0">
+                        {props.question}
+                    </h1>
+                    {props.imageUrl && (
+                        <img
+                            src={props.imageUrl}
+                            alt={`Question ${props.questionIndex + 1}`}
+                            draggable="false"
+                            class="mx-auto mt-4 max-h-64 object-contain rounded shadow"
+                        />
+                    )}
+                </div>
+
+                <div
+                    class="grid grid-cols-2 gap-4 max-w-xl 2xl:max-w-2xl"
+                    classList={{
+                        "md:grid-cols-3":
+                            props.answers.length > 4 ||
+                            props.answers.length === 3,
+                    }}
+                >
+                    <For each={props.answers}>
+                        {(answer, idx) => {
+                            // TODO: add answers component
+                            const isSelected = () =>
+                                selectedAnswerIndex() === idx();
+                            return (
+                                <label
+                                    tabIndex={0}
+                                    class={`cursor-pointer border rounded-lg p-2 sm:p-3 2xl:p-4 flex flex-col items-center justify-between text-center transition select-none h-full fade-in
                                     ${
                                         isSelected()
-                                            ? "border-gray-500 bg-gray-200 border-3"
+                                            ? "border-gray-500 bg-gray-200"
                                             : "bg-gray-100 border-gray-300 hover:bg-gray-200 active:bg-gray-300"
                                     }
                                 `}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                        e.preventDefault();
-                                        handleAnswerSelect(idx());
+                                    style={
+                                        isSelected()
+                                            ? {
+                                                  "box-shadow":
+                                                      "inset 0 0 0 2px var(--color-gray-500)",
+                                              }
+                                            : undefined
                                     }
-                                }}
-                            >
-                                <input
-                                    type="radio"
-                                    name={`question-${props.questionIndex}`}
-                                    value={idx()}
-                                    class="hidden"
-                                    checked={isSelected()}
-                                    onChange={() => handleAnswerSelect(idx())}
-                                />
-                                {answer.imageUrl && (
-                                    <img
-                                        src={answer.imageUrl}
-                                        alt={answer.answer}
-                                        draggable="false"
-                                        class="w-64 h-64 object-cover mb-2 rounded"
+                                    onKeyDown={(e) => {
+                                        if (
+                                            e.key === "Enter" ||
+                                            e.key === " "
+                                        ) {
+                                            e.preventDefault();
+                                            handleAnswerSelect(idx());
+                                        }
+                                    }}
+                                    onClick={() => {
+                                        handleAnswerSelect(idx());
+                                    }}
+                                    onTouchStart={() => {}}
+                                >
+                                    <input
+                                        type="radio"
+                                        name={`question-${props.questionIndex}`}
+                                        value={idx()}
+                                        class="hidden"
+                                        checked={isSelected()}
+                                        onChange={() =>
+                                            handleAnswerSelect(idx())
+                                        }
                                     />
-                                )}
-                                <span class="text-gray-800 font-medium">
-                                    {answer.answer}
-                                </span>
-                            </label>
-                        );
-                    }}
-                </For>
+                                    {answer.imageUrl && (
+                                        <div class="aspect-square w-full mb-2 rounded pointer-events-none shrink-0 overflow-hidden">
+                                            <img
+                                                src={answer.imageUrl}
+                                                alt={answer.answer}
+                                                draggable="false"
+                                                class="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                    )}
+                                    <span class="text-gray-800 font-medium shrink">
+                                        {answer.answer}
+                                    </span>
+                                </label>
+                            );
+                        }}
+                    </For>
+                </div>
             </div>
-
-            <div class="flex justify-between mt-6">
-                <button
-                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handlePreviousQuestion}
-                >
+            <div class="flex justify-center gap-4 shrink-0 fixed bottom-0 left-0 right-0 p-4 bg-white/95 border-t border-gray-200">
+                <Button fullWidth onClick={handlePreviousQuestion}>
                     {props.questionIndex === 0 ? "Back to Start" : "Previous"}
-                </button>
-                <button
-                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                </Button>
+                <Button
+                    fullWidth
                     onClick={handleNextQuestion}
                     disabled={selectedAnswerIndex() === undefined}
                 >
                     {props.questionIndex === props.questionCount - 1
                         ? "See Result"
                         : "Next"}
-                </button>
+                </Button>
             </div>
         </div>
     );

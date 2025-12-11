@@ -1,5 +1,6 @@
 import type { Component, Setter } from "solid-js";
 import type { ResultType } from "../types/quiz";
+import Button from "./Button";
 
 const Result: Component<{
     result: ResultType;
@@ -7,7 +8,7 @@ const Result: Component<{
     setSelectedAnswers: Setter<Record<number, number>>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6">
+        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6 fade-in">
             <h1 class="text-4xl text-gray-800">{props.result.result}</h1>
 
             {props.result.imageUrl && (
@@ -19,15 +20,15 @@ const Result: Component<{
                 />
             )}
 
-            <button
-                class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl transition-colors cursor-pointer"
+            <Button
+                fullWidth
                 onClick={() => {
                     props.setQuestionIndex(null);
                     props.setSelectedAnswers({});
                 }}
             >
                 Restart Quiz
-            </button>
+            </Button>
         </div>
     );
 };

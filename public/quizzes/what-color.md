@@ -8,8 +8,6 @@ Find out what your interests tell about your color preferences! <!-- optional qu
 
 ## What fruits do you like the most? <!-- Question 1 -->
 
-<img src="../images/apples.jpg" width="250"> <!-- optional image -->
-
 ### Apples and cherries <!-- Answer A -->
 
 tags: red <!-- comma-separated list of tags -->
@@ -35,6 +33,8 @@ tags: orange
 <img src="../images/tangerines-oranges.jpg" width="250">
 
 ## What animals do you like the most? <!-- Question 2 -->
+
+<img src="../images/apples.jpg" width="250"> <!-- optional image -->
 
 ### Cats and foxes
 

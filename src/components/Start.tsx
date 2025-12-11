@@ -1,4 +1,5 @@
 import type { Component, Setter } from "solid-js";
+import Button from "./Button";
 
 const Start: Component<{
     title: string;
@@ -7,7 +8,7 @@ const Start: Component<{
     setQuestionIndex: Setter<number | null>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6">
+        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6 fade-in">
             <h1 class="text-4xl text-gray-800">{props.title}</h1>
 
             {props.imageUrl && (
@@ -25,12 +26,9 @@ const Start: Component<{
                 </p>
             )}
 
-            <button
-                class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl transition-colors cursor-pointer"
-                onClick={() => props.setQuestionIndex(0)}
-            >
+            <Button fullWidth onClick={() => props.setQuestionIndex(0)}>
                 Start
-            </button>
+            </Button>
         </div>
     );
 };

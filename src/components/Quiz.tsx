@@ -54,6 +54,7 @@ const Quiz: Component<{ quiz: QuizType }> = (props) => {
                 />
             </Match>
             <Match when={questionIndex()! < props.quiz.questions.length}>
+                {/* TODO: Add questions component that has a For/Show component for each question to make css transitions easier, etc */}
                 <Question
                     question={currentQuestion()!.question}
                     imageUrl={currentQuestion()!.imageUrl}
