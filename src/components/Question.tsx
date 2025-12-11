@@ -36,10 +36,10 @@ const Question: Component<{
     return (
         <div>
             <div
-                class="flex-1 w-full overflow-auto flex flex-col items-center space-y-6 p-6 pt-8 fade-in"
+                class="flex-1 w-full overflow-auto flex flex-col items-center space-y-6 p-6 pt-8 fade-in max-w-xl 2xl:max-w-2xl mx-auto"
                 style={{ height: "calc(100dvh - 81px)" }}
             >
-                <div class="text-center max-w-3xl">
+                <div class="text-center">
                     <p class="text-gray-700">
                         Question {props.questionIndex + 1} of{" "}
                         {props.questionCount}
@@ -58,7 +58,7 @@ const Question: Component<{
                 </div>
 
                 <div
-                    class="grid grid-cols-2 auto-rows-fr gap-4 max-w-xl 2xl:max-w-2xl"
+                    class="grid grid-cols-2 auto-rows-fr gap-4"
                     classList={{
                         "md:grid-cols-3":
                             props.answers.length > 4 ||
