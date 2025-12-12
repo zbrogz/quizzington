@@ -1,3 +1,14 @@
+import { marked } from "marked";
+
+const renderer = new marked.Renderer();
+
+renderer.link = function ({ href, title, text }) {
+    const titleAttr = title ? ` title="${title}"` : "";
+    return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+};
+
+marked.use({ renderer });
+
 const parseQuizMarkdown = (md) => {
     // Remove BOM if present and normalize newlines
     md = md.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
@@ -193,8 +204,8 @@ const parseQuizMarkdown = (md) => {
             }
 
             // a plain paragraph beneath a result header — treat as description
-            if (!line.startsWith("#") && !img && !currentResult.description) {
-                currentResult.description = line;
+            if (!line.startsWith("#") && !img) {
+                currentResult.description += line;
                 continue;
             }
 
@@ -214,6 +225,13 @@ const parseQuizMarkdown = (md) => {
     if (currentResult) {
         resultObj.results.push(currentResult);
         currentResult = null;
+    }
+
+    for (const result of resultObj.results) {
+        if (result.description) {
+            result.description = marked.parse(result.description);
+            console.log("Parsed result description:", result.description);
+        }
     }
 
     return resultObj;

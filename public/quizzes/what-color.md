@@ -114,7 +114,7 @@ tags: red
 
 <img src="../images/red.png" width="250">
 
-Red lovers are passionate, energetic, and bold, always ready to stand out and take action.
+Red lovers are passionate, energetic, and bold, always ready to stand out and take action. You can [add really cool links](https://www.onemoresteptravels.com/blog-homepage/prettiest-areas-in-maui-itinerary-luxury-resort) if you want.
 
 ## You would like yellow! <!-- Result 2 -->
 
@@ -122,7 +122,7 @@ tags: yellow
 
 <img src="../images/yellow.jpg" width="250">
 
-Yellow fans are cheerful, optimistic, and creative, bringing sunshine and positivity wherever they go.
+Yellow fans are cheerful, optimistic, and creative, bringing sunshine and positivity wherever they go. You can [add links](https://www.onemoresteptravels.com/blog-homepage/prettiest-areas-in-maui-itinerary-luxury-resort) if you want.
 
 ## You would like green! <!-- Result 3 -->
 
@@ -130,7 +130,7 @@ tags: green
 
 <img src="../images/green.png" width="250">
 
-Green enthusiasts are calm, balanced, and nature-loving, finding peace and growth in every moment.
+Green enthusiasts are calm, balanced, and nature-loving, finding peace and growth in every moment. You can [add links](https://www.onemoresteptravels.com/blog-homepage/prettiest-areas-in-maui-itinerary-luxury-resort) if you want.
 
 ## You would like orange! <!-- Result 4 -->
 
@@ -138,4 +138,4 @@ tags: orange
 
 <img src="../images/orange.jpg" width="250">
 
-Orange admirers are adventurous, friendly, and enthusiastic, always seeking new experiences and connections.
+Orange admirers are adventurous, friendly, and enthusiastic, always seeking new experiences and connections. You can [add links](https://www.onemoresteptravels.com/blog-homepage/prettiest-areas-in-maui-itinerary-luxury-resort) if you want.

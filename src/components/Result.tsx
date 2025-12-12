@@ -21,6 +21,13 @@ const Result: Component<{
                 />
             )}
 
+            {props.result.description && (
+                <div
+                    class="text-lg text-gray-600 leading-relaxed"
+                    innerHTML={props.result.description}
+                />
+            )}
+
             <div class="flex justify-center gap-4 shrink-0 py-4 w-full">
                 <Button
                     fullWidth
