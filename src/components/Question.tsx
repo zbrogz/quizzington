@@ -44,7 +44,7 @@ const Question: Component<{
                         Question {props.questionIndex + 1} of{" "}
                         {props.questionCount}
                     </p>
-                    <h1 class="text-4xl text-gray-800 shrink-0">
+                    <h1 class="text-4xl text-gray-700 shrink-0">
                         {props.question}
                     </h1>
                     {props.imageUrl && (
@@ -122,7 +122,7 @@ const Question: Component<{
                                             />
                                         </div>
                                     )}
-                                    <span class="text-gray-800 font-medium shrink my-auto">
+                                    <span class="text-gray-700 font-medium shrink my-auto">
                                         {answer.answer}
                                     </span>
                                 </label>

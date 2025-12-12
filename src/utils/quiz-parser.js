@@ -15,7 +15,15 @@ const parseQuizMarkdown = (md) => {
 
     const extractImage = (line) => {
         const m = line.match(/<img\s+[^>]*src=(["'])(.*?)\1/i);
-        return m ? "../" + m[2] : null;
+        if (!m) {
+            return null;
+        }
+
+        if (m[2].startsWith("http://") || m[2].startsWith("https://")) {
+            return m[2];
+        }
+
+        return "../" + m[2];
     };
 
     // strip HTML comments from a line (handles multi-line comments if they appear inside the line text)
@@ -40,7 +48,7 @@ const parseQuizMarkdown = (md) => {
     for (let rawLine of lines) {
         // remove comments then trim
         const line = stripComments(rawLine).trim();
-        if (!line) continue;
+        // if (!line) continue;
 
         const lower = line.toLowerCase();
 
@@ -205,7 +213,7 @@ const parseQuizMarkdown = (md) => {
 
             // a plain paragraph beneath a result header — treat as description
             if (!line.startsWith("#") && !img) {
-                currentResult.description += line;
+                currentResult.description += line || "\n\n";
                 continue;
             }
 
