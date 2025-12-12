@@ -8,7 +8,7 @@ const Start: Component<{
     setQuestionIndex: Setter<number | null>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6 fade-in">
+        <div class="flex flex-col items-center text-center p-6 mx-auto space-y-6 fade-in max-w-xl 2xl:max-w-2xl">
             <h1 class="text-4xl text-gray-800">{props.title}</h1>
 
             {props.imageUrl && (
@@ -16,7 +16,7 @@ const Start: Component<{
                     src={props.imageUrl}
                     alt={props.title}
                     draggable="false"
-                    class="rounded-2xl w-full mx-auto shadow-md"
+                    class="rounded-2xl w-full mx-auto shadow-md max-w-2xl"
                 />
             )}
 

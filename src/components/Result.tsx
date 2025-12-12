@@ -9,7 +9,7 @@ const Result: Component<{
     setSelectedAnswers: Setter<Record<number, number>>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 max-w-3xl mx-auto space-y-6 fade-in">
+        <div class="flex flex-col items-center text-center p-6 mx-auto space-y-6 fade-in max-w-xl 2xl:max-w-2xl">
             <h1 class="text-4xl text-gray-800">{props.result.result}</h1>
 
             {props.result.imageUrl && (
