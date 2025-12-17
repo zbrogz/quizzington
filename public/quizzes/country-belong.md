@@ -1,8 +1,8 @@
-# What color should you choose? <!-- Quiz title -->
+# Which country do you belong in? <!-- Quiz title -->
 
-<img src="../images/nature-color-wheel.png" width="250">
+<img src="../images/wooden world map.jpg" width="250">
 
-Find out what your interests tell about your color preferences! <!-- optional quiz description -->
+Find out which country you are meant for, based on the culture, city life, and natural surroundings. <!-- optional quiz description -->
 
 # Questions
 
