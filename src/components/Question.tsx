@@ -34,17 +34,14 @@ const Question: Component<{
     };
 
     return (
-        <div>
-            <div
-                class="flex-1 w-full overflow-auto flex flex-col items-stretch space-y-6 p-6 pt-8 fade-in max-w-xl 2xl:max-w-2xl mx-auto"
-                style={{ height: "calc(100dvh - 81px)" }}
-            >
+        <div class="flex flex-col items-center text-center fade-in w-full h-[calc(100dvh-81px)] overflow-auto">
+            <div class="flex flex-col space-y-6 p-6 pt-8 fade-in max-w-3xl my--auto">
                 <div class="text-center">
-                    <p class="text-gray-700">
+                    <p class="text-gray-700 text-sm">
                         Question {props.questionIndex + 1} of{" "}
                         {props.questionCount}
                     </p>
-                    <h1 class="text-4xl text-gray-700 shrink-0">
+                    <h1 class="text-3xl text-gray-700 shrink-0">
                         {props.question}
                     </h1>
                     {props.imageUrl && (
@@ -73,7 +70,7 @@ const Question: Component<{
                             return (
                                 <label
                                     tabIndex={0}
-                                    class={`min-h-24 cursor-pointer border rounded-lg p-2 sm:p-3 2xl:p-4 flex flex-col items-center justify-between text-center transition select-none h-full fade-in
+                                    class={`min-h-24 cursor-pointer border rounded-lg p-2 flex flex-col items-center justify-between text-center transition select-none h-full fade-in wrap-anywhere
                                     ${
                                         isSelected()
                                             ? "border-gray-500 bg-gray-200"
@@ -122,7 +119,7 @@ const Question: Component<{
                                             />
                                         </div>
                                     )}
-                                    <span class="text-gray-700 font-medium shrink my-auto">
+                                    <span class="text-gray-700 text-sm shrink my-auto">
                                         {answer.answer}
                                     </span>
                                 </label>

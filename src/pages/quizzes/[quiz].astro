@@ -4,6 +4,7 @@ import QuizComponent from "../../components/Quiz";
 import type { QuizType } from "../../types/quiz";
 import parseQuizFromMarkdown from "../../utils/quiz-parser.js";
 import "../../styles/global.css";
+import "@fontsource-variable/open-sans";
 
 export async function getStaticPaths() {
     const quizzes = await getCollection("quizzes");

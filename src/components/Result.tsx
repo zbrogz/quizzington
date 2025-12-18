@@ -9,44 +9,48 @@ const Result: Component<{
     setSelectedAnswers: Setter<Record<number, number>>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 mx-auto space-y-6 fade-in max-w-xl 2xl:max-w-2xl">
-            <h1 class="text-4xl text-gray-700">{props.result.result}</h1>
+        <div class="flex flex-col items-center w-full h-dvh overflow-auto">
+            <div class="flex flex-col items-center text-center p-6 space-y-6 fade-in max-w-3xl my-auto">
+                <h1 class="text-3xl text-gray-700">{props.result.result}</h1>
 
-            {props.result.imageUrl && (
-                <img
-                    src={props.result.imageUrl}
-                    alt={props.result.result}
-                    draggable="false"
-                    class="rounded-2xl w-full mx-auto shadow-md"
-                />
-            )}
+                {props.result.imageUrl && (
+                    <img
+                        src={props.result.imageUrl}
+                        alt={props.result.result}
+                        draggable="false"
+                        class="rounded-2xl w-full mx-auto shadow-md"
+                    />
+                )}
 
-            {props.result.description && (
-                <div
-                    class="text-lg text-gray-600 leading-relaxed flex flex-col space-y-4"
-                    innerHTML={props.result.description}
-                />
-            )}
+                {props.result.description && (
+                    <div
+                        class="text-sm text-gray-600 leading-relaxed flex flex-col space-y-4"
+                        innerHTML={props.result.description}
+                    />
+                )}
 
-            <div class="flex justify-center gap-4 shrink-0 py-4 w-full">
-                <Button
-                    fullWidth
-                    onClick={() => {
-                        const newIndex = props.questionIndex - 1;
-                        props.setQuestionIndex(newIndex < 0 ? null : newIndex);
-                    }}
-                >
-                    Previous
-                </Button>
-                <Button
-                    fullWidth
-                    onClick={() => {
-                        props.setQuestionIndex(null);
-                        props.setSelectedAnswers({});
-                    }}
-                >
-                    Restart Quiz
-                </Button>
+                <div class="flex justify-center gap-4 shrink-0 py-4 w-full">
+                    <Button
+                        fullWidth
+                        onClick={() => {
+                            const newIndex = props.questionIndex - 1;
+                            props.setQuestionIndex(
+                                newIndex < 0 ? null : newIndex
+                            );
+                        }}
+                    >
+                        Previous
+                    </Button>
+                    <Button
+                        fullWidth
+                        onClick={() => {
+                            props.setQuestionIndex(null);
+                            props.setSelectedAnswers({});
+                        }}
+                    >
+                        Restart Quiz
+                    </Button>
+                </div>
             </div>
         </div>
     );

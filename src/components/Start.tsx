@@ -8,27 +8,29 @@ const Start: Component<{
     setQuestionIndex: Setter<number | null>;
 }> = (props) => {
     return (
-        <div class="flex flex-col items-center text-center p-6 mx-auto space-y-6 fade-in max-w-xl 2xl:max-w-2xl">
-            <h1 class="text-4xl text-gray-700">{props.title}</h1>
+        <div class="flex flex-col items-center w-full h-dvh overflow-auto">
+            <div class="flex flex-col items-center text-center p-6 space-y-6 fade-in max-w-3xl my-auto">
+                <h1 class="text-3xl text-gray-700">{props.title}</h1>
 
-            {props.imageUrl && (
-                <img
-                    src={props.imageUrl}
-                    alt={props.title}
-                    draggable="false"
-                    class="rounded-2xl w-full mx-auto shadow-md max-w-2xl"
-                />
-            )}
+                {props.imageUrl && (
+                    <img
+                        src={props.imageUrl}
+                        alt={props.title}
+                        draggable="false"
+                        class="rounded-md w-full mx-auto shadow-md"
+                    />
+                )}
 
-            {props.description && (
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    {props.description}
-                </p>
-            )}
+                {props.description && (
+                    <p class="text-md text-gray-600 leading-relaxed">
+                        {props.description}
+                    </p>
+                )}
 
-            <Button fullWidth onClick={() => props.setQuestionIndex(0)}>
-                Start
-            </Button>
+                <Button fullWidth onClick={() => props.setQuestionIndex(0)}>
+                    Start
+                </Button>
+            </div>
         </div>
     );
 };
