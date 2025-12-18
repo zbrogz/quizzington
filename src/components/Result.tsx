@@ -18,7 +18,7 @@ const Result: Component<{
                         src={props.result.imageUrl}
                         alt={props.result.result}
                         draggable="false"
-                        class="rounded-2xl w-full mx-auto shadow-md"
+                        class="rounded-md w-full mx-auto shadow-md"
                     />
                 )}
 
